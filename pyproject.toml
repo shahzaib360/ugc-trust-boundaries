@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ugc-trust-boundaries"
+version = "0.1.0"
+description = "Trust boundaries inside a website for agentic browsers: find the user-generated parts of a trusted page and stop them from steering the agent."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Shahzaib" }]
+keywords = ["ai-agent", "agentic-browser", "prompt-injection", "web-security", "ugc", "schema.org"]
+dependencies = ["lxml>=5", "numpy>=1.26", "scikit-learn>=1.4"]
+
+[project.optional-dependencies]
+agent = ["playwright>=1.45"]
+measure = ["ijson>=3.2"]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.urls]
+Homepage = "https://github.com/shahzaib360/ugc-trust-boundaries"
+
+[project.scripts]
+ugcguard = "ugcguard.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ugcguard = ["models/*.pkl", "bench/data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["browser: needs a Chromium that Playwright can launch"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+# HTML fixtures and scenario tables read better unwrapped.
+"tests/*" = ["E501"]
+"src/ugcguard/bench/scenarios.py" = ["E501"]
