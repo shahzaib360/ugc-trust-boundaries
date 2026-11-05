@@ -1,0 +1,114 @@
+{
+  "blocks": 349197,
+  "A_markup_labels": {
+    "sites": 198,
+    "sites_with_positives": 23,
+    "with_names": {
+      "at_0.5": {
+        "n": 348805,
+        "positives": 6539,
+        "roc_auc": 0.9459,
+        "avg_precision": 0.5941,
+        "threshold": 0.5,
+        "precision": 0.5329,
+        "recall": 0.6018,
+        "f1": 0.5653
+      },
+      "at_best": {
+        "n": 348805,
+        "positives": 6539,
+        "roc_auc": 0.9459,
+        "avg_precision": 0.5941,
+        "threshold": 0.675,
+        "precision": 0.6006,
+        "recall": 0.556,
+        "f1": 0.5775
+      }
+    },
+    "no_names": {
+      "at_0.5": {
+        "n": 348805,
+        "positives": 6539,
+        "roc_auc": 0.948,
+        "avg_precision": 0.5625,
+        "threshold": 0.5,
+        "precision": 0.4314,
+        "recall": 0.5955,
+        "f1": 0.5004
+      },
+      "at_best": {
+        "n": 348805,
+        "positives": 6539,
+        "roc_auc": 0.948,
+        "avg_precision": 0.5625,
+        "threshold": 0.7,
+        "precision": 0.5622,
+        "recall": 0.5227,
+        "f1": 0.5417
+      }
+    }
+  },
+  "A_check_on_signature_sites": {
+    "n": 244178,
+    "positives": 1356,
+    "roc_auc": 0.855,
+    "avg_precision": 0.0315,
+    "threshold": 0.5,
+    "precision": 0.037,
+    "recall": 0.0199,
+    "f1": 0.0259,
+    "sites": 10
+  },
+  "B_union_labels": {
+    "sites": 198,
+    "sites_with_positives": 33,
+    "with_names": {
+      "at_0.5": {
+        "n": 349197,
+        "positives": 10321,
+        "roc_auc": 0.8943,
+        "avg_precision": 0.3081,
+        "threshold": 0.5,
+        "precision": 0.3965,
+        "recall": 0.3079,
+        "f1": 0.3466
+      },
+      "at_best": {
+        "n": 349197,
+        "positives": 10321,
+        "roc_auc": 0.8943,
+        "avg_precision": 0.3081,
+        "threshold": 0.3,
+        "precision": 0.3206,
+        "recall": 0.3933,
+        "f1": 0.3532
+      }
+    },
+    "no_names": {
+      "at_0.5": {
+        "n": 349197,
+        "positives": 10321,
+        "roc_auc": 0.8666,
+        "avg_precision": 0.2165,
+        "threshold": 0.5,
+        "precision": 0.219,
+        "recall": 0.3169,
+        "f1": 0.259
+      },
+      "at_best": {
+        "n": 349197,
+        "positives": 10321,
+        "roc_auc": 0.8666,
+        "avg_precision": 0.2165,
+        "threshold": 0.625,
+        "precision": 0.2651,
+        "recall": 0.2569,
+        "f1": 0.2609
+      }
+    }
+  },
+  "final_threshold": {
+    "with_names": 0.3,
+    "no_names": 0.625
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "weblinx": {
+    "pages": 10073,
+    "demos": 2336,
+    "websites": 175,
+    "pages_with_ugc_markup_pct": 2.6,
+    "pages_with_ugc_rules_pct": 3.7,
+    "pages_with_ugc_clf_pct": 28.8,
+    "pages_with_ugc_any_pct": 29.7,
+    "markup_coverage_pct": 8.8,
+    "rules_coverage_pct": 12.3,
+    "jsonld_only_pages": 120,
+    "ugc_text_share_median_pct": 12.4,
+    "demos_touching_ugc_markup_pct": 7.4,
+    "demos_touching_ugc_rules_pct": 9.8,
+    "demos_touching_ugc_any_pct": 59.5,
+    "actions": 52473,
+    "actions_on_ugc_pages_any_pct": 23.1,
+    "actions_located": 25541,
+    "actions_targeting_ugc_rules_pct": 0.2,
+    "actions_targeting_ugc_any_pct": 2.5,
+    "websites_with_any_ugc_page_pct": 86.3,
+    "websites_with_markup_pct": 14.9,
+    "macro_pages_with_ugc_any_pct": 24.7,
+    "by_category": {
+      "search & AI tools": {
+        "pages": 2092,
+        "markup_pct": 0.4,
+        "rules_pct": 0.4,
+        "any_pct": 28.2
+      },
+      "shopping": {
+        "pages": 1331,
+        "markup_pct": 5.9,
+        "rules_pct": 9.7,
+        "any_pct": 30.9
+      },
+      "social, forums & UGC platforms": {
+        "pages": 1248,
+        "markup_pct": 6.2,
+        "rules_pct": 10.3,
+        "any_pct": 39.7
+      },
+      "reference & education": {
+        "pages": 1220,
+        "markup_pct": 0.5,
+        "rules_pct": 0.5,
+        "any_pct": 27.4
+      },
+      "food & restaurants": {
+        "pages": 1126,
+        "markup_pct": 6.6,
+        "rules_pct": 6.7,
+        "any_pct": 35.7
+      },
+      "travel & booking": {
+        "pages": 926,
+        "markup_pct": 0.1,
+        "rules_pct": 0.2,
+        "any_pct": 29.0
+      },
+      "news & magazines": {
+        "pages": 855,
+        "markup_pct": 0.0,
+        "rules_pct": 0.0,
+        "any_pct": 38.5
+      },
+      "productivity & chat": {
+        "pages": 747,
+        "markup_pct": 0.0,
+        "rules_pct": 0.0,
+        "any_pct": 12.4
+      },
+      "email": {
+        "pages": 343,
+        "markup_pct": 5.0,
+        "rules_pct": 5.0,
+        "any_pct": 11.1
+      },
+      "other": {
+        "pages": 185,
+        "markup_pct": 0.0,
+        "rules_pct": 0.5,
+        "any_pct": 16.2
+      }
+    },
+    "pages_by_source": {
+      "markup:json-ld": 112,
+      "markup:microdata": 80,
+      "markup:rel-ugc": 70,
+      "signature:bazaarvoice": 53,
+      "signature:etsy": 42,
+      "signature:comment-body": 36,
+      "signature:comment-content": 34,
+      "signature:stackexchange": 24,
+      "signature:x": 22,
+      "signature:wordpress": 22,
+      "signature:discourse": 12,
+      "signature:amazon": 7,
+      "signature:ugc-token": 4,
+      "signature:facebook-comments": 1,
+      "signature:youtube": 1
+    }
+  },
+  "mind2web": {
+    "steps": 7775,
+    "tasks": 1009,
+    "websites": 73,
+    "steps_on_ugc_pages_rules_pct": 0.5,
+    "steps_on_ugc_pages_clf_pct": 45.6,
+    "steps_on_ugc_pages_any_pct": 45.6,
+    "tasks_touching_ugc_any_pct": 75.7,
+    "targets_in_ugc_any_pct": 3.8,
+    "by_domain": {
+      "Entertainment": {
+        "steps": 1384,
+        "rules_pct": 0.0,
+        "any_pct": 55.1
+      },
+      "Shopping": {
+        "steps": 2309,
+        "rules_pct": 1.6,
+        "any_pct": 45.3
+      },
+      "Travel": {
+        "steps": 4082,
+        "rules_pct": 0.1,
+        "any_pct": 42.6
+      }
+    }
+  }
+}

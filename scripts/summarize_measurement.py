@@ -176,15 +176,19 @@ def markdown(w: dict, m: dict | None) -> str:
         lines += [
             "",
             f"Mind2Web (train): {m['steps']:,} action steps in {m['tasks']:,} tasks on "
-            f"{m['websites']} websites. Snapshots keep no href/itemprop/rel, so only signatures "
-            "and the classifier apply.",
+            f"{m['websites']} websites. Its snapshots strip href, itemprop, rel, most data-* "
+            "attributes and scripts (as many agent pipelines do when they simplify the DOM), "
+            "so markup is invisible and only class/id signatures and the classifier apply. The "
+            "classifier "
+            "figures were not audited on Mind2Web; given the 16% precision measured on WebLINX "
+            "they are loose upper bounds.",
             "",
             f"- steps on a page with UGC: {m['steps_on_ugc_pages_rules_pct']}% (signatures), "
-            f"{m['steps_on_ugc_pages_any_pct']}% (signatures + classifier)",
-            f"- tasks touching a UGC page: {m['tasks_touching_ugc_any_pct']}%",
-            f"- action targets inside UGC: {m['targets_in_ugc_any_pct']}%",
+            f"up to {m['steps_on_ugc_pages_any_pct']}% (+ classifier)",
+            f"- tasks touching a UGC page (+ classifier): up to {m['tasks_touching_ugc_any_pct']}%",
+            f"- action targets inside UGC (+ classifier): up to {m['targets_in_ugc_any_pct']}%",
             "",
-            "| domain | steps | signatures | + classifier |",
+            "| domain | steps | signatures | + classifier (upper bound) |",
             "|---|---|---|---|",
         ]
         for d, v in m["by_domain"].items():
