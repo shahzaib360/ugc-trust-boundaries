@@ -25,15 +25,21 @@ def cmd_regions(args) -> int:
 
 
 def cmd_demo(args) -> int:
+    from pathlib import Path
+
     from playwright.sync_api import sync_playwright
 
     from .agent.browser import launch
+    from .agent.detectors import OnnxDetector, RegexDetector
     from .agent.runner import DEFENSES, _Holder, install_route, run_episode
     from .bench.scenarios import TASKS_BY_ID, attacks_for
     from .bench.server import BenchServer
 
     task = TASKS_BY_ID[args.task]
     attacks = [a for a in attacks_for(task) if a.goal == args.goal and a.slot == args.slot]
+    detectors = {"regex": RegexDetector()}
+    if (Path(args.detector) / "model.onnx").exists():
+        detectors["deberta"] = OnnxDetector(args.detector)
     srv = BenchServer().start()
     try:
         with sync_playwright() as pw:
@@ -46,7 +52,20 @@ def cmd_demo(args) -> int:
             if attacks:
                 print(f"attack: {attacks[0].id} - payload in a {task.section} on {task.ugc_page}")
             for name in args.defenses.split(","):
-                r = run_episode(page, holder, srv, task, DEFENSES[name], args.variant, attacks)
+                defense = DEFENSES[name]
+                if defense.detector and defense.detector not in detectors:
+                    print(f"\n== defense: {name}: skipped (detector model not found)")
+                    continue
+                r = run_episode(
+                    page,
+                    holder,
+                    srv,
+                    task,
+                    defense,
+                    args.variant,
+                    attacks,
+                    detector=detectors.get(defense.detector or ""),
+                )
                 print(f"\n== defense: {name} (site variant: {args.variant})")
                 for s in r.steps:
                     verdict = s["verdict"] + (f" [{s['rule']}]" if s["rule"] else "")
@@ -94,6 +113,11 @@ def main(argv=None) -> int:
     d.add_argument("--slot", default="body")
     d.add_argument("--variant", default="schema")
     d.add_argument("--defenses", default="none,origin-set,guard-rules")
+    d.add_argument(
+        "--detector",
+        default="data/cache/models/pi-deberta",
+        help="ONNX DeBERTa detector directory (for detector-deberta)",
+    )
     d.set_defaults(fn=cmd_demo)
 
     b = sub.add_parser("bench", help="run the full benchmark")
