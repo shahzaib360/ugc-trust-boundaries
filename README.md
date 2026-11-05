@@ -14,6 +14,8 @@ An agent that shops, books or researches for a user reads whole pages. Part of e
 4. **evaluates** security and usefulness in a real browser against seven attack goals and four payload styles, compared with origin-set and injection-detector baselines;
 5. **drafts** a minimal markup proposal ([`docs/markup-proposal.md`](docs/markup-proposal.md)).
 
+New to agent security? Start with the **[student guide (PDF)](docs/student-guide.pdf)**. It explains the problem, the ideas and the results from scratch, with exercises.
+
 > **Ethics note.** This is defensive research. Every attack runs against local, fake websites (`*.test`), served by the benchmark itself through a proxy, so no request leaves the machine. The injection styles are publicly documented ones. The real-world measurement only reads public research datasets (WebLINX, Mind2Web) and publishes aggregate statistics.
 
 ## The gap
@@ -231,5 +233,5 @@ src/ugcguard/
 scripts/   collect_*, analyze_*, train_classifier.py, summarize_*.py, run_llm.py
 results/   measurement.md, audit.md, classifier_eval.json, bench.md, bench_summary.json,
            bench_episodes.jsonl.gz (every episode with its step trace)
-docs/      design.md, markup-proposal.md
+docs/      design.md, markup-proposal.md, student-guide.pdf (built by scripts/build_student_guide.py)
 ```

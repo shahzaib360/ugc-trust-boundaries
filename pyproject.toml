@@ -16,6 +16,7 @@ dependencies = ["lxml>=5", "numpy>=1.26", "scikit-learn>=1.4"]
 [project.optional-dependencies]
 agent = ["playwright>=1.45"]
 measure = ["ijson>=3.2"]
+docs = ["reportlab>=4"]
 dev = ["pytest>=8", "ruff>=0.6"]
 
 [project.urls]
@@ -45,3 +46,4 @@ select = ["E", "F", "W", "I", "B", "UP", "SIM"]
 # HTML fixtures and scenario tables read better unwrapped.
 "tests/*" = ["E501"]
 "src/ugcguard/bench/scenarios.py" = ["E501"]
+"scripts/build_student_guide.py" = ["E501"]
