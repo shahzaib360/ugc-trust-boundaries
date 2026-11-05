@@ -88,7 +88,17 @@ class BenchServer:
             def do_POST(self):  # noqa: N802
                 self._handle("POST")
 
-        self.httpd = ThreadingHTTPServer((host, port), Handler)
+            def do_CONNECT(self):  # noqa: N802
+                # HTTPS tunnels (browser background traffic) are refused: nothing leaves.
+                self._send(405, "")
+
+        class QuietServer(ThreadingHTTPServer):
+            daemon_threads = True
+
+            def handle_error(self, request, client_address):
+                pass  # the browser drops keep-alive sockets all the time
+
+        self.httpd = QuietServer((host, port), Handler)
         self.port = self.httpd.server_address[1]
         self.thread = threading.Thread(target=self.httpd.serve_forever, daemon=True)
 

@@ -52,9 +52,8 @@ def cmd_demo(args) -> int:
                     verdict = s["verdict"] + (f" [{s['rule']}]" if s["rule"] else "")
                     if s.get("approved") is not None:
                         verdict += " -> user " + ("approved" if s["approved"] else "declined")
-                    print(
-                        f"  {s['source']:6s} {s['kind']:6s} {str(s['target'])[:60]:60s} {verdict}"
-                    )
+                    target = str(s["target"] or "")[:60]
+                    print(f"  {s['source']:6s} {s['kind']:6s} {target:60s} {verdict}")
                 print(f"  task done: {r.task_success}   attack succeeded: {r.attack_success}")
                 if r.answer:
                     print(f"  answer: {r.answer[:160]}")

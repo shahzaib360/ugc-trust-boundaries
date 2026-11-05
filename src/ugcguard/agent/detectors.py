@@ -87,27 +87,42 @@ class OnnxDetector:
 
 
 def strip_flagged(obs: Observation, detector, threshold: float = 0.5) -> list[str]:
-    """Hide every text block the detector flags. Returns the flagged texts."""
+    """Hide every text unit the detector flags. Returns the flagged texts.
+
+    A unit is a *leaf* block (a block element with no block descendants, e.g. one
+    review body), scored as a whole. Text sitting directly in a container that
+    holds other blocks (a section heading) is scored on its own, so a flagged
+    review never takes its whole section down with it.
+    """
     doc = obs.doc
-    blocks: dict[int, str] = {}
-    for i in range(len(doc)):
+    n = len(doc)
+    has_block_desc = [False] * n
+    for i in range(n - 1, -1, -1):
+        p = doc.parent[i]
+        if p >= 0 and (doc.tag[i] in BLOCK_TAGS or has_block_desc[i]):
+            has_block_desc[p] = True
+    units: dict[tuple, tuple[str, list[int]]] = {}
+    for i in range(n):
         if doc.skipped[i] or not doc.own_text[i]:
             continue
         b = i
         while b >= 0 and doc.tag[b] not in BLOCK_TAGS:
             b = doc.parent[b]
-        if b < 0:
-            b = i
-        if b not in blocks:
-            blocks[b] = doc.text(b, limit=1500)
-    ids = list(blocks)
-    scores = detector.score([blocks[b] for b in ids])
-    flagged = [b for b, s in zip(ids, scores, strict=True) if s >= threshold]
+        if b >= 0 and not has_block_desc[b]:
+            key = ("block", b)
+            if key not in units:
+                units[key] = (doc.text(b, limit=1500), list(doc.subtree(b)))
+        else:
+            hide = [] if (doc.tag[i] in BLOCK_TAGS or has_block_desc[i]) else list(doc.subtree(i))
+            units[("own", i)] = (doc.own_text[i], hide)
+    keys = list(units)
+    scores = detector.score([units[k][0] for k in keys])
+    flagged = [k for k, sc in zip(keys, scores, strict=True) if sc >= threshold]
     hidden: set[int] = set()
-    for b in flagged:
-        hidden.update(doc.subtree(b))
+    for k in flagged:
+        hidden.update(units[k][1])
     for j in hidden:
         doc.skipped[j] = True
     obs.elements = [el for el in obs.elements if el.node not in hidden]
     obs.segments = [s for s in obs.segments if s.node not in hidden]
-    return [blocks[b] for b in flagged]
+    return [units[k][0] for k in flagged]
